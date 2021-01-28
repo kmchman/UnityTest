@@ -16,6 +16,6 @@ Temp*
 *.sln
 *.unityproj
 *.userprefs
-
+.vs
 
 
