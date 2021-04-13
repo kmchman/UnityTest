@@ -16,17 +16,20 @@ public class MoleGameManager : MonoBehaviour
     [SerializeField] private GameObject startButton;
     [SerializeField] private Text catchCountText;
     [SerializeField] private Text timeText;
+    [SerializeField] private Text readyTimeText;
 
     private GameState gameState;
     private Coroutine gameCoroutine;
     private int catchCount;
     private float timeLimit;
+    private float readyTime;
 
     public static MoleGameManager instance = null;
     private void Awake()
     {
+        readyTime = 3f;
         timeLimit = 10f;
-        gameState = GameState.Init;
+        gameState = GameState.Ready;
         if (instance == null)
         {
             instance = this;
@@ -60,6 +63,12 @@ public class MoleGameManager : MonoBehaviour
             case GameState.Init:
                 break;
             case GameState.Ready:
+                readyTime -= Time.deltaTime;
+                readyTimeText.text = ((int)readyTime).ToString();
+                if (readyTime <= 0f)
+                {                    
+                    StartGame();
+                }
                 break;
             case GameState.Play:
                 {
@@ -93,14 +102,19 @@ public class MoleGameManager : MonoBehaviour
         }
     }
 
-    public void OnClickBtnStart()
+    private void StartGame()
     {
+        readyTimeText.text = string.Empty;
         startButton.SetActive(false);
         gameState = GameState.Play;
 
         if (gameCoroutine != null)
             StopCoroutine(gameCoroutine);
         gameCoroutine = StartCoroutine(RespawnCoroutine());
+    }
+    public void OnClickBtnStart()
+    {
+        StartGame();    
     }
 
     public void CatchMole()
