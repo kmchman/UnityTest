@@ -1,0 +1,209 @@
+
+Chelsia.png
+size: 900,380
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+HairR_01
+  rotate: false
+  xy: 509, 30
+  size: 59, 172
+  orig: 426, 612
+  offset: 145, 361
+  index: -1
+HairR_02
+  rotate: true
+  xy: 509, 10
+  size: 18, 59
+  orig: 426, 612
+  offset: 142, 379
+  index: -1
+Hair_L01
+  rotate: false
+  xy: 462, 204
+  size: 112, 176
+  orig: 426, 612
+  offset: 191, 361
+  index: -1
+Hair_L02
+  rotate: false
+  xy: 845, 24
+  size: 7, 53
+  orig: 426, 612
+  offset: 294, 395
+  index: -1
+Hair_R_back
+  rotate: false
+  xy: 741, 205
+  size: 47, 103
+  orig: 426, 612
+  offset: 147, 364
+  index: -1
+Hair_front_L
+  rotate: true
+  xy: 790, 177
+  size: 65, 99
+  orig: 426, 612
+  offset: 214, 424
+  index: -1
+Hair_front_M
+  rotate: false
+  xy: 768, 85
+  size: 49, 90
+  orig: 426, 612
+  offset: 172, 434
+  index: -1
+Hair_front_R
+  rotate: false
+  xy: 706, 80
+  size: 60, 123
+  orig: 426, 612
+  offset: 150, 404
+  index: -1
+arm_L01
+  rotate: true
+  xy: 576, 310
+  size: 70, 213
+  orig: 426, 612
+  offset: 277, 120
+  index: -1
+arm_L02
+  rotate: false
+  xy: 791, 244
+  size: 104, 136
+  orig: 426, 612
+  offset: 241, 116
+  index: -1
+arm_R01
+  rotate: false
+  xy: 371, 175
+  size: 89, 205
+  orig: 426, 612
+  offset: 76, 139
+  index: -1
+arm_R02
+  rotate: false
+  xy: 627, 74
+  size: 77, 130
+  orig: 426, 612
+  offset: 73, 131
+  index: -1
+body
+  rotate: false
+  xy: 0, 5
+  size: 369, 375
+  orig: 426, 612
+  offset: 47, 0
+  index: -1
+eye02
+  rotate: true
+  xy: 855, 79
+  size: 96, 29
+  orig: 426, 612
+  offset: 165, 410
+  index: -1
+eye_01
+  rotate: true
+  xy: 819, 79
+  size: 96, 34
+  orig: 426, 612
+  offset: 165, 410
+  index: -1
+eye_close
+  rotate: false
+  xy: 371, 7
+  size: 92, 17
+  orig: 426, 612
+  offset: 166, 411
+  index: -1
+eyebrow_L
+  rotate: true
+  xy: 854, 31
+  size: 46, 12
+  orig: 426, 612
+  offset: 214, 446
+  index: -1
+eyebrow_R
+  rotate: false
+  xy: 465, 3
+  size: 33, 21
+  orig: 426, 612
+  offset: 164, 433
+  index: -1
+face
+  rotate: false
+  xy: 371, 26
+  size: 136, 147
+  orig: 426, 612
+  offset: 157, 366
+  index: -1
+hair_obj
+  rotate: false
+  xy: 576, 206
+  size: 163, 102
+  orig: 426, 612
+  offset: 135, 453
+  index: -1
+hands
+  rotate: true
+  xy: 570, 67
+  size: 135, 55
+  orig: 426, 612
+  offset: 133, 216
+  index: -1
+head_shd_01
+  rotate: true
+  xy: 570, 0
+  size: 65, 102
+  orig: 426, 612
+  offset: 211, 402
+  index: -1
+head_shd_03
+  rotate: false
+  xy: 767, 8
+  size: 54, 69
+  orig: 426, 612
+  offset: 167, 433
+  index: -1
+head_shd_04
+  rotate: false
+  xy: 823, 16
+  size: 20, 61
+  orig: 426, 612
+  offset: 157, 418
+  index: -1
+mouse01
+  rotate: true
+  xy: 462, 175
+  size: 27, 16
+  orig: 426, 612
+  offset: 201, 378
+  index: -1
+mouse02
+  rotate: true
+  xy: 891, 218
+  size: 24, 9
+  orig: 426, 612
+  offset: 201, 383
+  index: -1
+mouse_close
+  rotate: false
+  xy: 767, 0
+  size: 20, 6
+  orig: 426, 612
+  offset: 203, 387
+  index: -1
+neck
+  rotate: true
+  xy: 674, 0
+  size: 72, 91
+  orig: 426, 612
+  offset: 186, 306
+  index: -1
+neck_obj
+  rotate: false
+  xy: 868, 48
+  size: 23, 29
+  orig: 426, 612
+  offset: 205, 311
+  index: -1
