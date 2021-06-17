@@ -50,7 +50,7 @@ MonoBehaviour:
       - m_Id: c60bae239d8d46143946a771e38621b3
         m_Value: ServerData/[BuildTarget]
       - m_Id: cc18c1b3cf039c042b6c3e0eb4be03c6
-        m_Value: http://172.20.30.25:7702/dev/resource/Test/[BuildTarget]
+        m_Value: http://1.234.82.14/EveryFarm2/blackp/Test/[BuildTarget]
     m_ProfileEntryNames:
     - m_Id: 815bc348c10584545ad121fac0a4a1b8
       m_Name: BuildTarget
