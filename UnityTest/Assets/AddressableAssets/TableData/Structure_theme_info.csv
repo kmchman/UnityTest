@@ -1,0 +1,6 @@
+﻿index,res_path,ui_name,ui_desc,sale_rate,icon_tag,structure_cnt,bonus_clean_point,is_test,sort_index,start_date,end_date,,,,,,,,
+int,string,string,string,int,icon_tag,int,int,int,int,string,string,,,,,,,,
+1,,ui_name_theme_1,ui_desc_theme_1,0,3,8,320,0,2,2021-05-20 00:00:00,2021-06-15 23:59:59,,,,,,,,
+2,,ui_name_theme_2,ui_desc_theme_2,0,1,7,500,0,1,2021-05-20 00:00:00,2221-05-20 00:00:00,,,,,,,,
+3,,ui_name_theme_3,ui_desc_theme_3,10,2,6,400,0,3,2021-05-20 00:00:00,2221-05-20 00:00:00,,,,,,,,
+4,,ui_name_theme_4,ui_desc_theme_4,0,4,5,400,0,4,2021-05-20 00:00:00,2221-05-20 00:00:00,,,,,,,,

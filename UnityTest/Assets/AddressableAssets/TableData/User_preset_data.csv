@@ -1,0 +1,5 @@
+﻿index,reward_type,reward_index,reward_value
+int,reward_type,int,int
+1,1,0,20000
+2,3,0,100
+3,9,113001,1

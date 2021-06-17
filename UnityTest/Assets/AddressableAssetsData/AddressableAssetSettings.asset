@@ -29,6 +29,7 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: 6c5e1f575eff4e346b4aafa50d70235e, type: 2}
   - {fileID: 11400000, guid: ac892f2e1c4b0104a8ea2d8941f61573, type: 2}
+  - {fileID: 11400000, guid: 85f63d7f7b6e1de4e80a7b064a3cc6a7, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -70,6 +71,7 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - Table
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 57ae3d8ca1637e24187c278664a58155, type: 2}
