@@ -24,14 +24,16 @@ public class GameManager : MonoBehaviour
                 //string fileName = Path.GetFileName(item.PrimaryKey);
                 Addressables.LoadAssetAsync<UnityEngine.TextAsset>(item).Completed += (obj) =>
                 {
-                    var uiItem = Instantiate<UITestItem>(itemPrefab, parentObj.transform);
-                    uiItem.SetData(item.PrimaryKey);
-                    Debug.Log($" {item.PrimaryKey}");
+                    if (obj.Status == UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
+                    {
+                        var uiItem = Instantiate<UITestItem>(itemPrefab, parentObj.transform);
+                        uiItem.SetData(item.PrimaryKey);
+                        Debug.Log($" {item.PrimaryKey}");
+                        
+                    }
                     loadCnt++;
-
                     if (loadCnt >= csvList.Count)
                         Debug.Log("complete");
-
                 };
             }
         };
