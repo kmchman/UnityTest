@@ -8,11 +8,14 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject parentObj;
     [SerializeField] private UITestItem itemPrefab;
+    [SerializeField] private UnityEngine.UI.Text versionText;
 
     // Start is called before the first frame update
     void Start()
     {
+        versionText.text = Application.version;
         Debug.Log("Load Start");
+        //versionText.text = PlyaerSetting.
         Addressables.LoadResourceLocationsAsync("Table").Completed += (handle) =>
         {
             int loadCnt = 0;
