@@ -8,6 +8,9 @@ Assets/Test*
 Assets/VSCode*
 Build
 Library
+Obj
+obj/
+Logs/
 ProjectSettings
 ScreenShot_*
 Temp*
