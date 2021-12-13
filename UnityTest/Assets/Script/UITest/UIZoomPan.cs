@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class UIZoomPan : MonoBehaviour
+public class UIZoomPan : MonoBehaviour, IDragHandler, IBeginDragHandler
 {
     [SerializeField] private RectTransform _zoomTargetRt;
 
-    private readonly float _ZOOM_IN_MAX = 16f;
+    private readonly float _ZOOM_IN_MAX = 2f;
     private readonly float _ZOOM_OUT_MAX = 1f;
     private readonly float _ZOOM_SPEED = 1.5f;
 
     private bool _isZooming = false;
+    private Vector2 lastMousePosition;
 
     private void Update()
     {
@@ -87,5 +89,26 @@ public class UIZoomPan : MonoBehaviour
             (position.x - Screen.width * 0.5f) / (Screen.width * 0.5f),
             (position.y - Screen.height * 0.5f) / (Screen.height * 0.5f));
         return normlizedPos;
+    }
+
+    void IDragHandler.OnDrag(PointerEventData eventData)
+    {
+        Vector2 currentMousePosition = eventData.position;
+        Vector2 diff = currentMousePosition - lastMousePosition;
+        RectTransform rect = GetComponent<RectTransform>();
+
+        Vector3 newPosition = rect.position + new Vector3(diff.x, diff.y, transform.position.z);
+        Vector3 oldPos = rect.position;
+        rect.position = newPosition;
+        //if (!IsRectTransformInsideSreen(rect))
+        //{
+        //    rect.position = oldPos;
+        //}
+        lastMousePosition = currentMousePosition;
+    }
+
+    void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
+    {
+        lastMousePosition = eventData.position;
     }
 }

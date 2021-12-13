@@ -1109,10 +1109,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1873429622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 990ee3b2bcac12d4da5638db706272d7, type: 3}
+  m_Script: {fileID: 11500000, guid: f374e0d6f8a7c24439acbd88d695b920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zoomTargetRt: {fileID: 1873429623}
+  zoomTargetRt: {fileID: 1873429623}
+  perspectiveZoomSpeed: 0.5
+  orthoZoomSpeed: 0.5
 --- !u!1 &2088287316
 GameObject:
   m_ObjectHideFlags: 0
