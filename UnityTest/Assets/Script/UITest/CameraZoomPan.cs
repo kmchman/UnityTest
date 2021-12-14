@@ -18,10 +18,10 @@ public class CameraZoomPan : MonoBehaviour
     private float mapMinX, mapMaxX, mapMinY, mapMaxY;
     private void Awake()
     {
-        mapMinX = bgMap.position.x - bgMap.sizeDelta.x;
-        mapMaxX = bgMap.position.x + bgMap.sizeDelta.x;
-        mapMinY = bgMap.position.y - bgMap.sizeDelta.y;
-        mapMaxY = bgMap.position.y + bgMap.sizeDelta.y;
+        mapMinX = bgMap.position.x - bgMap.sizeDelta.x / 2;
+        mapMaxX = bgMap.position.x + bgMap.sizeDelta.x / 2;
+        mapMinY = bgMap.position.y - bgMap.sizeDelta.y / 2;
+        mapMaxY = bgMap.position.y + bgMap.sizeDelta.y / 2;
     }
 
     // Update is called once per frame
