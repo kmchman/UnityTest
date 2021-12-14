@@ -8,8 +8,8 @@ Assets/Test*
 Assets/VSCode*
 Build
 Library
-Obj
-obj/
+Obj/
+UnityTest/obj/*
 Logs/
 ProjectSettings
 ScreenShot_*
