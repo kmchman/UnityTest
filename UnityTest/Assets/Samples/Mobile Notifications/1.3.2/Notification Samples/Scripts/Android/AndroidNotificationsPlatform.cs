@@ -82,7 +82,7 @@ namespace NotificationSamples.Android
         {
             var notification = new AndroidGameNotification()
             {
-                DeliveredChannel = DefaultChannelId
+                DeliveredChannel = DefaultChannelId   
             };
 
             return notification;

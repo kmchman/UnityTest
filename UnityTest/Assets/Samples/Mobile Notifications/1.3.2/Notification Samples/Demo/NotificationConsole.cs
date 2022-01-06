@@ -175,9 +175,7 @@ namespace NotificationSamples.Demo
 
         private void SendNotificationFromUi()
         {
-            int? badgeNumber = int.TryParse(badgeField.text, out int parsedBadgeNumber)
-                ? parsedBadgeNumber
-                : (int?)null;
+            int? badgeNumber = int.TryParse(badgeField.text, out int parsedBadgeNumber) ? parsedBadgeNumber : (int?)null;
 
             DateTime deliveryTime;
             if (float.TryParse(timeField.text, out float minutes))

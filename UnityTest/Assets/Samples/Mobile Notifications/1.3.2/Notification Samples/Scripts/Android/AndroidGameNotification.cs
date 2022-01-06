@@ -86,6 +86,8 @@ namespace NotificationSamples.Android
         public AndroidGameNotification()
         {
             internalNotification = new AndroidNotification();
+            internalNotification.ShowTimestamp = true;
+            internalNotification.Color = UnityEngine.Color.red;
         }
 
         /// <summary>

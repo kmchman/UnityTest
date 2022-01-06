@@ -171,7 +171,28 @@ namespace NotificationSamples
                 }
             }
         }
+        public const string ChannelId = "game_channel0";
+        private void TestNoti(string title, string body, DateTime deliveryTime, int? badgeNumber = null, bool reschedule = false, string channelId = null, string smallIcon = null, string largeIcon = null)
+        {
+            IGameNotification notification = CreateNotification();
 
+            if (notification == null)
+            {
+                return;
+            }
+
+            notification.Title = title;
+            notification.Body = body;
+            notification.Group = !string.IsNullOrEmpty(channelId) ? channelId : ChannelId;
+            notification.DeliveryTime = deliveryTime;
+            notification.SmallIcon = smallIcon;
+            notification.LargeIcon = largeIcon;
+            if (badgeNumber != null)
+            {
+                notification.BadgeNumber = badgeNumber;
+            }
+            ScheduleNotification(notification);
+        }
         /// <summary>
         /// Respond to application foreground/background events.
         /// </summary>
@@ -189,6 +210,12 @@ namespace NotificationSamples
                 OnForegrounding();
 
                 return;
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                DateTime deliveryTime = DateTime.Now.ToLocalTime().AddSeconds(5 + (i * 3));
+                TestNoti("Test Notification", "Remember to make more cookies!", deliveryTime, channelId: ChannelId);
             }
 
             Platform.OnBackground();
@@ -215,6 +242,9 @@ namespace NotificationSamples
                         PendingNotifications.RemoveAt(i);
                     }
                 }
+
+                // To Do : 그룹별 시간이 제일 짧은애만 남도록 수정
+                
 
                 // Sort notifications by delivery time, if no notifications have a badge number set
                 bool noBadgeNumbersSet =
@@ -430,6 +460,23 @@ namespace NotificationSamples
             return result;
         }
 
+        public void CancelNotificationByChannel(string channel)
+        {
+            if (PendingNotifications == null)
+                return;
+
+            // Check each pending notification for expiry, then remove it
+            for (int i = PendingNotifications.Count - 1; i >= 0; --i)
+            {
+                PendingNotification queuedNotification = PendingNotifications[i];
+                if (queuedNotification.Notification.Group == channel)
+                {
+                    PendingNotifications.RemoveAt(i);
+                    LocalNotificationExpired?.Invoke(queuedNotification);
+                }
+            }
+        }
+
         /// <summary>
         /// Cancels a scheduled notification.
         /// </summary>
@@ -550,6 +597,7 @@ namespace NotificationSamples
         // Clear foreground notifications and reschedule stuff from a file
         private void OnForegrounding()
         {
+            Platform.DismissAllDisplayedNotifications();
             PendingNotifications.Clear();
 
             Platform.OnForeground();
