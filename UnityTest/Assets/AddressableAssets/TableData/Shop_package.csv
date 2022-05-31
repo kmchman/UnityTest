@@ -1,7 +1,0 @@
-﻿index,pID_google,pID_apple,renewal,icon_tag,is_test,limit,reset_time,reset_day,reset_month,start_date,end_date
-int,string,string,int,icon_tag,int,int,int,int,int,string,string
-1000,test_01,a_test_01,1,0,0,1,0,0,28,2021-04-14 00:00:00,9999-99-99 00:00:00
-1001,test_02,a_test_02,0,0,0,1,24,0,0,2021-04-14 00:00:00,9999-99-99 00:00:00
-1002,test_03,a_test_03,0,2,0,1,0,0,0,2021-04-14 00:00:00,9999-99-99 00:00:00
-1003,test_04,a_test_04,0,3,0,1,0,0,0,2021-04-14 00:00:00,2021-05-13 23:59:59
-1004,test_05,a_test_05,0,1,0,3,0,0,28,2021-04-14 00:00:00,9999-99-99 00:00:00

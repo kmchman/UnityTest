@@ -1,8 +1,0 @@
-﻿index,group,res_path,ui_spot_name,spot_x,spot_y,open,req_mtrl_id1,req_mtrl_value1,req_mtrl_id2,req_mtrl_value2,req_mtrl_id3,req_mtrl_value3,req_mtrl_id4,req_mtrl_value4,req_town_level,price_gold,price_seed,reward_id,time,lunch_pt1,lunch_pt2,lunch_pt3,ui_pt1_desc,ui_pt2_desc,ui_pt3_desc,pt1_reward_value,pt2_reward_value,pt3_reward_value,start_date,end_date,event,exp_town,exp_villager,exp_favor,product_list
-int,int,string,string,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,int,string,string,string,int,int,int,date,date,int,int,int,int,string
-1,1,icons/quest,ui_spot_name_1,1,2,1,0,0,0,0,0,0,0,0,10,0,0,1,120,20,50,100,ui_pt1_desc_1,ui_pt2_desc_1,ui_pt3_desc_1,1,2,3,2021/04/29 11:00:00,9999/04/29 11:00:00,0,10,10,1,1|2|3|4|
-2,1,icons/quest,ui_spot_name_2,2,3,1,0,0,0,0,0,0,0,0,10,0,0,1,180,20,50,100,ui_pt1_desc_2,ui_pt2_desc_2,ui_pt3_desc_2,1,2,3,2021/04/29 11:00:00,9999/04/29 11:00:00,0,10,10,1,2|3|4
-3,1,icons/quest,ui_spot_name_3,3,4,1,0,0,0,0,0,0,0,0,10,0,0,1,240,20,50,100,ui_pt1_desc_3,ui_pt2_desc_3,ui_pt3_desc_3,1,2,3,2021/04/29 11:00:00,9999/04/29 11:00:00,0,10,10,1,3|4
-4,2,icons/quest,ui_spot_name_4,1,2,0,1,1,2,2,3,3,4,4,10,1000,0,1,120,20,50,100,ui_pt1_desc_4,ui_pt2_desc_4,ui_pt3_desc_4,1,2,3,2021/04/29 11:00:00,9999/04/29 11:00:00,0,10,10,1,4
-5,2,icons/quest,ui_spot_name_5,2,3,0,1,1,2,2,3,3,4,4,10,1000,0,1,180,20,50,100,ui_pt1_desc_5,ui_pt2_desc_5,ui_pt3_desc_5,1,2,3,2021/04/29 11:00:00,9999/04/29 11:00:00,0,10,10,1,1|2
-6,2,icons/quest,ui_spot_name_6,3,4,0,1,1,2,2,3,3,4,4,10,1000,0,1,240,20,50,100,ui_pt1_desc_6,ui_pt2_desc_6,ui_pt3_desc_6,1,2,3,2021/04/29 11:00:00,9999/04/29 11:00:00,0,10,10,1,2|3|

@@ -1,4 +1,0 @@
-﻿index,pID_google,pID_apple,open_condition,open_value,is_test,limit,limited_period
-int,string,string,open_condition,int,int,int,int
-8001,dummy_001,a_dummy_001,1,10,0,1,24
-8002,dummy_002,a_dummy_002,2,113004,0,1,168

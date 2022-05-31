@@ -1,4 +1,0 @@
-﻿index,group,event_type,item_id,item_value,rate,start_date,end_date,event,ui_event_name,ui_event_desc
-int,int,event_type,int,int,int,date,date,int,string,string
-1,1,1,401001,5,0,2021/04/29 11:00:00,9999/04/29 11:00:00,1,ui_event_name_1,ui_event_desc_1
-2,2,2,5011001,1,5,2021/04/29 11:00:00,9999/04/29 11:00:00,1,ui_event_name_2,ui_event_desc_2
