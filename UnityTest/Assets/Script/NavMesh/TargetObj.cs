@@ -1,18 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-public class TargetObj : MonoBehaviour
+public class TargetObj : FollowObject
 {
-    // Start is called before the first frame update
-    void Start()
+    private List<FollowObject> followList = new List<FollowObject>();
+
+    private void Awake()
     {
-        
+        uid = FollowManager.Instance.SUid++;
+    }
+    public bool HasEmptyFollowSlot()
+    {
+        return followList.Count < 5;
     }
 
-    // Update is called once per frame
-    void Update()
+    public FollowObject AddFollow(FollowObject obj)
     {
-        
+        followList.Add(obj);
+
+        if (followList.Count == 1)
+        {
+            return this;
+        }
+        return followList[followList.Count - 2];
     }
+
+    public void RemoveFollow(int uid)
+    {
+        followList.RemoveAll(item => item.uid == uid);
+    }
+
 }

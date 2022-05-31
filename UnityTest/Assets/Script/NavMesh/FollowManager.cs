@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FollowManager : AlmostEngine.Singleton<FollowManager>
 {
+    public int SUid = 0;
     [SerializeField] private TargetObj targetObj;
 
     private List<PlayerNavMesh> playerList = new List<PlayerNavMesh>();

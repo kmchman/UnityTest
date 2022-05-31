@@ -655,9 +655,13 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 436499704876388088, guid: 54b04e48ce78206458d0e840df3a41ac, type: 3}
+      propertyPath: targetObject
+      value: 
+      objectReference: {fileID: 353916126}
+    - target: {fileID: 436499704876388088, guid: 54b04e48ce78206458d0e840df3a41ac, type: 3}
       propertyPath: movePositionTransform
       value: 
-      objectReference: {fileID: 353916125}
+      objectReference: {fileID: 0}
     - target: {fileID: 436499704876388094, guid: 54b04e48ce78206458d0e840df3a41ac, type: 3}
       propertyPath: m_RootOrder
       value: 4

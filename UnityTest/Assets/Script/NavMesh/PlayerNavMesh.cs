@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerNavMesh : MonoBehaviour
+public class PlayerNavMesh : FollowObject
 {
     private NavMeshAgent navMeshAgent;
 
     public LayerMask whatIsGround;
 
-    [SerializeField] private Transform movePositionTransform;
+    [SerializeField] private TargetObj targetObject;
     private float sightDist = 20f;
     private float approchDist = 1f;
     private float walkPointRange = 30f;
     private bool walkPointSet;
     private Vector3 walkPoint;
+    private FollowObject followObject;
 
+    static int sUid = 0;
     private void Awake()
     {
+        uid = FollowManager.Instance.SUid++;
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.speed = 10f;
         FollowManager.Instance.AddPlayer(this);
@@ -25,7 +28,7 @@ public class PlayerNavMesh : MonoBehaviour
 
     private void Update()
     {
-        var dist = Vector3.Distance(transform.position, movePositionTransform.position);
+        var dist = Vector3.Distance(transform.position, followObject != null ? followObject.transform.position : targetObject.transform.position);
 
         if (dist > sightDist)
         {
@@ -45,14 +48,6 @@ public class PlayerNavMesh : MonoBehaviour
 
         //}
 
-        //if (Vector3.Distance(transform.position, movePositionTransform.position) > 1f)
-        //{
-        //    navMeshAgent.destination = movePositionTransform.position;
-        //}
-        //else
-        //{
-        //    navMeshAgent.SetDestination(transform.position);
-        //}
 
     }
     private void SearchWalkPoint()
@@ -70,6 +65,8 @@ public class PlayerNavMesh : MonoBehaviour
 
     private void Patrolling()
     {
+        followObject = null;
+        targetObject.RemoveFollow(uid);
         if (!walkPointSet)
         {
             float randomZ = Random.Range(-walkPointRange, walkPointRange);
@@ -91,8 +88,20 @@ public class PlayerNavMesh : MonoBehaviour
 
     private void Following()
     {
-        navMeshAgent.SetDestination(movePositionTransform.position);
-        transform.LookAt(movePositionTransform.transform);
+        if (followObject == null)
+        {
+            followObject = targetObject.AddFollow(this);
+            //if (targetObject.HasEmptyFollowSlot())
+            //{
+                
+            //}
+        }
+        
+        if (followObject != null)
+        {
+            navMeshAgent.SetDestination(followObject.transform.position);
+            transform.LookAt(followObject.transform.position);
+        }
         walkPointSet = false;
     }
 
