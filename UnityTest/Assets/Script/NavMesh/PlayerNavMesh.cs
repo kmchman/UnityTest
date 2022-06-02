@@ -28,7 +28,7 @@ public class PlayerNavMesh : FollowObject
 
     private void Update()
     {
-        var dist = Vector3.Distance(transform.position, followObject != null ? followObject.transform.position : targetObject.transform.position);
+        var dist = Vector3.Distance(transform.position, targetObject.transform.position);
 
         if (dist > sightDist)
         {
@@ -83,7 +83,6 @@ public class PlayerNavMesh : FollowObject
         {
             walkPointSet = false;
         }
-
     }
 
     private void Following()
