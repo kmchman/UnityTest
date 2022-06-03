@@ -9,6 +9,7 @@ public class PlayerNavMesh : FollowObject
 
     public LayerMask whatIsGround;
 
+    [SerializeField] private Animator animator;
     [SerializeField] private TargetObj targetObject;
     [SerializeField] private GameObject parent;
     private float sightDist = 200f;
@@ -88,6 +89,10 @@ public class PlayerNavMesh : FollowObject
         navMeshAgent.SetDestination(targetObject.transform.position);
         transform.LookAt(targetObject.transform.position);
         walkPointSet = false;
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("New State"))
+        {
+            animator.SetTrigger("Swim");
+        }
     }
 
     private void Approching()
@@ -98,6 +103,10 @@ public class PlayerNavMesh : FollowObject
         {
             transform.LookAt(parent.transform.position);
         }
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("WhaleLookUp"))
+        {
+            animator.SetTrigger("LookUp");
+        }   
     }
 
 
