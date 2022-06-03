@@ -8,6 +8,7 @@ public class FollowAI : MonoBehaviour
     [SerializeField] private Rigidbody rigid;
     [SerializeField] private Animator animator;
     [SerializeField] private List<FollowAI> childrenList;
+    [SerializeField] private Transform babyTarget;
 
     private float speed = 2f;
     private float maxVelocity = 10f;
@@ -19,9 +20,9 @@ public class FollowAI : MonoBehaviour
         
     }
 
-    public void LookAt(Transform tr)
+    public void BaryTarget(Transform tr)
     {
-        transform.LookAt(tr);
+        babyTarget = tr;
     }
     private void Update()
     {
@@ -47,12 +48,17 @@ public class FollowAI : MonoBehaviour
             }
             else
             {
-                transform.LookAt(target.transform);
+                
                 rigid.velocity = Vector3.zero;
                 if (animator != null && !animator.GetCurrentAnimatorStateInfo(0).IsName("WhaleLookUp") && !animator.IsInTransition(0))
                 {
                     animator.SetTrigger("LookUp");
+                    BabyLookUp();
                 }
+
+                transform.LookAt(target.transform);
+                if (babyTarget != null)
+                    transform.LookAt(babyTarget);
             }
         }
         else
@@ -66,7 +72,7 @@ public class FollowAI : MonoBehaviour
     {
         foreach (var item in childrenList)
         {
-            item.LookAt(target.transform);
+            item.BaryTarget(target.transform);
         }
     }
 
