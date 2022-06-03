@@ -10,12 +10,13 @@ public class PlayerNavMesh : FollowObject
     public LayerMask whatIsGround;
 
     [SerializeField] private TargetObj targetObject;
-    private float sightDist = 20f;
-    private float approchDist = 1f;
+    [SerializeField] private GameObject parent;
+    private float sightDist = 200f;
+    private float approchDist = 0.3f;
     private float walkPointRange = 30f;
     private bool walkPointSet;
     private Vector3 walkPoint;
-    private FollowObject followObject;
+    private int targetSlot;
 
     static int sUid = 0;
     private void Awake()
@@ -65,8 +66,6 @@ public class PlayerNavMesh : FollowObject
 
     private void Patrolling()
     {
-        followObject = null;
-        targetObject.RemoveFollow(uid);
         if (!walkPointSet)
         {
             float randomZ = Random.Range(-walkPointRange, walkPointRange);
@@ -84,30 +83,21 @@ public class PlayerNavMesh : FollowObject
             walkPointSet = false;
         }
     }
-
     private void Following()
     {
-        if (followObject == null)
-        {
-            followObject = targetObject.AddFollow(this);
-            //if (targetObject.HasEmptyFollowSlot())
-            //{
-                
-            //}
-        }
-        
-        if (followObject != null)
-        {
-            navMeshAgent.SetDestination(followObject.transform.position);
-            transform.LookAt(followObject.transform.position);
-        }
+        navMeshAgent.SetDestination(targetObject.transform.position);
+        transform.LookAt(targetObject.transform.position);
         walkPointSet = false;
     }
 
     private void Approching()
-    {
+    {   
         navMeshAgent.SetDestination(transform.position);
         walkPointSet = false;
+        if (parent != null)
+        {
+            transform.LookAt(parent.transform.position);
+        }
     }
 
 
