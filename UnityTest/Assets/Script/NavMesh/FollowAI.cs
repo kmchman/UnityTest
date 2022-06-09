@@ -4,105 +4,71 @@ using UnityEngine;
 
 public class FollowAI : MonoBehaviour
 {
-    [SerializeField] private GameObject target;
+    [SerializeField] private Vector3 target;
     [SerializeField] private Rigidbody rigid;
     [SerializeField] private Animator animator;
-    [SerializeField] private List<FollowAI> childrenList;
-    [SerializeField] private Transform babyTarget;
+    [SerializeField] private List<BabyWhaleAI> babyList;
 
-    private float speed = 2f;
-    private float maxVelocity = 10f;
+    private float speed = 5f;
+    private float patrolRange = 10f;
 
-    private float delay;
-    private bool fixedLookUp;
-    private void Awake()
-    {
-        
-    }
-
-    public void BaryTarget(Transform tr)
-    {
-        babyTarget = tr;
-    }
+    private bool patrolSet;
+     
     private void Update()
     {
-        if (delay > 0)
+        Patrolling();
+        var dist = target - transform.position;
+
+        if (dist.magnitude > 0.3f)
         {
-            delay -= Time.deltaTime;
-            return;
-        }
-        if (rigid != null)
-        {
-            var dist = target.transform.position - transform.position;
+            rigid.AddForce(dist.normalized * speed);
+            transform.LookAt(target);
+            //limitMoveSpeed();
 
-            if (dist.magnitude > 0.3f)
+            if (animator != null && !animator.GetCurrentAnimatorStateInfo(0).IsName("WhaleFollow"))
             {
-                rigid.AddForce(dist.normalized * speed);
-                transform.LookAt(target.transform);
-                limitMoveSpeed();
-
-                if (animator != null &&!animator.GetCurrentAnimatorStateInfo(0).IsName("WhaleFollow"))
-                {
-                    animator.SetTrigger("Swim");
-                }
-            }
-            else
-            {
-                
-                rigid.velocity = Vector3.zero;
-                if (animator != null && !animator.GetCurrentAnimatorStateInfo(0).IsName("WhaleLookUp") && !animator.IsInTransition(0))
-                {
-                    animator.SetTrigger("LookUp");
-                    BabyLookUp();
-                }
-
-                transform.LookAt(target.transform);
-                if (babyTarget != null)
-                    transform.LookAt(babyTarget);
+                animator.SetTrigger("Swim");
             }
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
-            transform.LookAt(target.transform);
+
+            rigid.velocity = Vector3.zero;
+            if (animator != null && !animator.GetCurrentAnimatorStateInfo(0).IsName("WhaleLookUp") && !animator.IsInTransition(0))
+            {
+                animator.SetTrigger("LookUp");
+                BabyLookUp();
+            }
+
+            transform.LookAt(target);
+        }
+    }
+
+    private void Patrolling()
+    {
+        if (!patrolSet)
+        {
+            float randomZ = Random.Range(-patrolRange, patrolRange);
+            float randomY = Random.Range(-patrolRange, patrolRange);
+            float randomX = Random.Range(-patrolRange, patrolRange);
+
+            target = new Vector3(transform.position.x + randomX, transform.position.y + randomY, transform.position.z + randomZ);
+            patrolSet = true;
+            return;
+        }
+
+        Vector3 distanceToWalkPoint = transform.position - target;
+        if (distanceToWalkPoint.magnitude < 1.0f)
+        {
+            patrolSet = false;
         }
     }
 
     public void BabyLookUp()
     {
-        foreach (var item in childrenList)
+        foreach (var item in babyList)
         {
-            item.BaryTarget(target.transform);
-        }
-    }
-
-    private void limitMoveSpeed()
-    {
-        if (rigid.velocity.x > maxVelocity)
-        {
-            rigid.velocity = new Vector3(maxVelocity, rigid.velocity.y, rigid.velocity.z);
-        }
-        if (rigid.velocity.x < (maxVelocity * -1))
-        {
-            rigid.velocity = new Vector3((maxVelocity * -1), rigid.velocity.y, rigid.velocity.z);
-        }
-
-        if (rigid.velocity.y > maxVelocity)
-        {
-            rigid.velocity = new Vector3(rigid.velocity.x, maxVelocity, rigid.velocity.z);
-        }
-        if (rigid.velocity.y < (maxVelocity * -1))
-        {
-            rigid.velocity = new Vector3(rigid.velocity.x, (maxVelocity * -1), rigid.velocity.z);
-        }
-
-        if (rigid.velocity.z > maxVelocity)
-        {
-            rigid.velocity = new Vector3(rigid.velocity.x, rigid.velocity.y, maxVelocity);
-        }
-        if (rigid.velocity.z < (maxVelocity * -1))
-        {
-            rigid.velocity = new Vector3(rigid.velocity.x, rigid.velocity.y, (maxVelocity * -1));
+            item.State = BabyWhaleAI.BabyState.Action0;
         }
     }
 }
