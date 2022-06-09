@@ -18,7 +18,7 @@ public class BabyWhaleAI : MonoBehaviour
 
     public BabyState State { get; set; }
     
-    private float speed = 6f;
+    private float speed = 5f;
     public float elapse;
 
     private float maxAngle = 360 * Mathf.PI / 180;
@@ -61,7 +61,7 @@ public class BabyWhaleAI : MonoBehaviour
 
     private void limitMoveSpeed()
     {
-        var currMaxVelocity = speed + (speed * Mathf.Cos(elapse) * 0.3f);
+        var currMaxVelocity = speed + (speed * Mathf.Cos(elapse) * 0.5f);
         if (rigid.velocity.magnitude > currMaxVelocity)
         {
             rigid.velocity = Vector3.ClampMagnitude(rigid.velocity, currMaxVelocity);
