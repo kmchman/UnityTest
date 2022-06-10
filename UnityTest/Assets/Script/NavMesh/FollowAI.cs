@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FollowAI : MonoBehaviour
 {
-    public enum ActionState
+    public enum BehaviorState
     {
         Idle,
         Follow,
@@ -12,36 +12,37 @@ public class FollowAI : MonoBehaviour
     }
 
 
-    [SerializeField] private Vector3 target;
     [SerializeField] private Rigidbody rigid;
     [SerializeField] private Animator animator;
     [SerializeField] private List<BabyWhaleAI> babyList;
     private GameObject targetTitan;
 
-    public LayerMask layerMask;
     private float speed = 5f;
     private float patrolRange = 10f;
     private float targetingCooltime;
     private float stayCooltime;
 
     private bool patrolSet;
-    private ActionState state;
+    private BehaviorState state;
+    private GameObject targetRep;
+    private GameObject patrolTarget;
 
     private void Awake()
     {
-        state = ActionState.Idle;
+        state = BehaviorState.Idle;
+        patrolTarget = new GameObject("patrolTarget");
     }
     private void Update()
     {
         switch (state)
         {
-            case ActionState.Idle:
+            case BehaviorState.Idle:
                 Patrolling();
                 break;
-            case ActionState.Follow:
+            case BehaviorState.Follow:
                 FollowPlayer();
                 break;
-            case ActionState.Stay:
+            case BehaviorState.Stay:
                 Stay();
                 break;
         }
@@ -54,25 +55,26 @@ public class FollowAI : MonoBehaviour
         if (stayCooltime <= 0)
         {
             targetingCooltime = 5f;
-            state = ActionState.Idle;
+            state = BehaviorState.Idle;
         }
     }
 
     private void FollowPlayer()
     {
-        var dist = target - transform.position;
+        var dist = targetRep.transform.position - transform.position;
 
-        if (dist.magnitude > 0.5f)
+        if (dist.magnitude > 1f)
         {
             rigid.AddForce(dist.normalized * speed);
-            transform.LookAt(target);
+            transform.LookAt(targetRep.transform);
         }
         else
         {
             stayCooltime = 3f;
-            state = ActionState.Stay;
+            state = BehaviorState.Stay;
+            transform.LookAt(targetRep.transform);
             rigid.velocity = Vector3.zero;
-            transform.LookAt(targetTitan.transform);
+            //transform.LookAt(targetTitan.transform);
         }
     }
 
@@ -83,10 +85,11 @@ public class FollowAI : MonoBehaviour
         var inSightRange = Physics.CheckSphere(transform.position, 10f, playerLayerMask);
         if (inSightRange && targetingCooltime <= 0)
         {
-            state = ActionState.Follow;
+            state = BehaviorState.Follow;
 
             var overlap = Physics.OverlapSphere(transform.position, 10f, playerLayerMask);
-            target = overlap[0].transform.TransformPoint(2, 0, 0);
+            //target.transform.position = overlap[0].transform.TransformPoint(0, 0, 0);
+            targetRep = overlap[0].gameObject;
             targetTitan = overlap[0].transform.gameObject;
             return;
         }
@@ -94,26 +97,26 @@ public class FollowAI : MonoBehaviour
         if (!patrolSet)
         {
             float randomZ = Random.Range(-patrolRange, patrolRange);
-            float randomY = Random.Range(0, 3);
+            float randomY = Random.Range(0, 10);
             float randomX = Random.Range(-patrolRange, patrolRange);
 
-            target = new Vector3(transform.position.x + randomX, randomY, transform.position.z + randomZ);
+            patrolTarget.transform.position = new Vector3(transform.position.x + randomX, randomY, transform.position.z + randomZ);
+            targetRep = patrolTarget;
             patrolSet = true;
-            return;
         }
 
-        Vector3 distanceToWalkPoint = transform.position - target;
+        Vector3 distanceToWalkPoint = transform.position - targetRep.transform.position;
         if (distanceToWalkPoint.magnitude < 1.0f)
         {
             patrolSet = false;
         }
 
-        var dist = target - transform.position;
+        var dist = targetRep.transform.position - transform.position;
 
         if (dist.magnitude > 0.3f)
         {
             rigid.AddForce(dist.normalized * speed);
-            transform.LookAt(target);
+            transform.LookAt(targetRep.transform.position);
             //limitMoveSpeed();
 
             if (animator != null && !animator.GetCurrentAnimatorStateInfo(0).IsName("WhaleFollow"))
@@ -131,7 +134,7 @@ public class FollowAI : MonoBehaviour
                 BabyLookUp();
             }
 
-            transform.LookAt(target);
+            transform.LookAt(targetRep.transform);
         }
     }
 
