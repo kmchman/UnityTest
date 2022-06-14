@@ -11,25 +11,27 @@ public class FollowAI : MonoBehaviour
         Stay,
     }
 
-
+    public int CurrSpawnNumber;
+    [SerializeField] private List<SpawnObject> spawnObjList;
     [SerializeField] private Rigidbody rigid;
     [SerializeField] private Animator animator;
     [SerializeField] private List<BabyWhaleAI> babyList;
 
     private float speed = 5f;
-    private float patrolRange = 10f;
     private float targetingCooltime;
     private float stayCooltime;
 
     private BehaviorState state;
     private GameObject targetRep;
     private GameObject patrolTarget;
-
     private void Awake()
     {
         state = BehaviorState.Idle;
         patrolTarget = new GameObject("patrolTarget");
+        patrolTarget.transform.position = RandomPatrolPoint();
+        targetRep = patrolTarget;
     }
+
     private void Update()
     {
         switch (state)
@@ -76,6 +78,11 @@ public class FollowAI : MonoBehaviour
         }
     }
 
+    private Vector3 RandomPatrolPoint()
+    {
+        return spawnObjList[CurrSpawnNumber].GetRandomPos();
+    }
+
     private void Patrolling()
     {
         targetingCooltime -= Time.deltaTime;
@@ -93,7 +100,7 @@ public class FollowAI : MonoBehaviour
 
         var dist = targetRep.transform.position - transform.position;
 
-        if (dist.magnitude > 0.3f)
+        if (dist.magnitude > 1f)
         {
             rigid.AddForce(dist.normalized * speed);
             transform.LookAt(targetRep.transform.position);
@@ -102,11 +109,7 @@ public class FollowAI : MonoBehaviour
         {
             transform.LookAt(targetRep.transform);
 
-            float randomZ = Random.Range(-patrolRange, patrolRange);
-            float randomY = Random.Range(0, 10);
-            float randomX = Random.Range(-patrolRange, patrolRange);
-
-            patrolTarget.transform.position = new Vector3(transform.position.x + randomX, randomY, transform.position.z + randomZ);
+            patrolTarget.transform.position = RandomPatrolPoint();
             targetRep = patrolTarget;
         }
     }
