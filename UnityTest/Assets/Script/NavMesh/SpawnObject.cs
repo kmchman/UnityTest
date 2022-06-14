@@ -14,6 +14,15 @@ public class SpawnObject : MonoBehaviour
     public Vector3 GetRandomPos()
     {
         var pos = Random.insideUnitCircle * radius;
-        return new Vector3(pos.x, 0, pos.y) + transform.position;
+        var randPos = new Vector3(pos.x, Random.Range(-3, 3), pos.y) + transform.position;
+
+        //float posY = ;
+        RaycastHit hit;
+        Physics.Raycast(randPos, Vector3.down, out hit, 100f, 1 << LayerMask.NameToLayer("Ground"));
+        if (hit.collider == null)
+        {
+            randPos.y = 5f;
+        }
+        return randPos;
     }
 }

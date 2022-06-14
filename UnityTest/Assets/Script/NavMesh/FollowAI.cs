@@ -46,6 +46,7 @@ public class FollowAI : MonoBehaviour
                 Stay();
                 break;
         }
+        AvoidFloor();
 
     }
 
@@ -54,7 +55,7 @@ public class FollowAI : MonoBehaviour
         stayCooltime -= Time.deltaTime;
         if (stayCooltime <= 0)
         {
-            targetingCooltime = 5f;
+            targetingCooltime = 10f;
             state = BehaviorState.Idle;
         }
     }
@@ -75,6 +76,16 @@ public class FollowAI : MonoBehaviour
             transform.LookAt(targetRep.transform.position);
             rigid.velocity = Vector3.zero;
             //transform.LookAt(targetTitan.transform);
+        }
+    }
+
+    private void AvoidFloor()
+    {
+        RaycastHit hit;
+        Physics.Raycast(transform.position, Vector3.down, out hit, 100f, 1 << LayerMask.NameToLayer("Ground"));
+        if (hit.collider == null || hit.distance < 1f)
+        {
+            rigid.AddForce(Vector3.up * 3f);
         }
     }
 
